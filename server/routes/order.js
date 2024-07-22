@@ -68,12 +68,13 @@ router.get("/",async(req,res)=>{
 // there is some error here 
 
 router.get("/income", verifyTokenandAdmin, async (req, res) => {
+    const productId=req.query.pid;
     const date = new Date();
     const lastmonth = new Date(date.setMonth(date.getMonth() - 1));
     const previousmonth = new Date(new Date().setMonth(lastmonth.getMonth() - 1));
     try {
         const income = await Order.aggregate([
-            { $match: { createdAt: { $gte: previousmonth } } },
+            { $match: { createdAt: { $gte: previousmonth },...CryptoJS(productId&&{ products:{$elemMatch:{productId}}}) } },
             {
                 $project: {
                     month: { $month: "$createdAt" },
