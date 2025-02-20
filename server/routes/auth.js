@@ -10,12 +10,14 @@ const jwt=require("jsonwebtoken");
 //register
 
 router.post("/register",async(req,res)=>{
+    console.log(req.body);
     const newUser=new User({
         username:req.body.username,
         email:req.body.email,
         // password:req.body.password,
         password:CryptoJS.AES.encrypt(req.body.password, process.env.PASS_SEC).toString(),
     });
+    // console.log(username);
     try{
         const savedUser= await newUser.save()
         //saves the new user to db
@@ -23,7 +25,6 @@ router.post("/register",async(req,res)=>{
     } catch(err){
         res.status(500).json(err);
     }
-
 });
 
 

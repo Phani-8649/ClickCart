@@ -7,7 +7,7 @@ import { Add, Remove } from '@mui/icons-material'
 
 // import { useHistory } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-
+import { Link } from "react-router-dom";
 import { mobile } from "../responsive"
 import { useSelector } from 'react-redux'
 
@@ -154,6 +154,11 @@ const Button=styled.button`
 
 
 const Cart = () => {
+    // for shopping cart dynamicness 
+    const shoppingBagCount = useSelector((state) => state.cart.quantity);
+    
+    // add wishlist also 
+
     const cart=useSelector(state=>state.cart);
     
     const [stripeToken,setStripeToken]=useState(null);
@@ -193,9 +198,12 @@ const Cart = () => {
       <Wrapper>
         <Title>Your Bag</Title>
         <Top>
-            <TopButton>Continue Shopping</TopButton>
+            <Link to="/">
+                <TopButton>Continue Shopping</TopButton>
+            </Link>
             <TopTexts>
-                <TopText>shopping bag(2)</TopText>
+                {/* <TopText>shopping bag(2)</TopText> */}
+                <TopText>shopping bag({shoppingBagCount})</TopText> 
                 <TopText>Your Wishlist(0)</TopText>
             </TopTexts>
             <TopButton type="filled">Check out now</TopButton>

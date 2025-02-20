@@ -82,10 +82,10 @@ const Navbar = () => {
         <Center><Logo>phani</Logo></Center>
         <Right>
             <MenuItem>
-                Register
+                <Link to="/register">Register</Link>
             </MenuItem>
             <MenuItem>
-                SignIn
+                <Link to="/login">signin</Link>
             </MenuItem>
             <Link to="/cart">
                 <MenuItem>
